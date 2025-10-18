@@ -1,203 +1,533 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список гиперссылок</title>
+    <title>Разработка пользовательского Web-интерфейса</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        #header {
+            background-color: #2c3e50;
+            color: white;
+            width: 100%;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            border-radius: 5px;
+            display: block;
+        }
+
+        .site-title {
+            flex: 1;
+            text-align: center;
+            margin: 0 20px;
+        }
+
+        .site-title h1 {
+            font-size: 1.5em;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Навигация */
+        #main-nav {
+            flex: 0 0 auto;
+        }
+
+        #main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #main-nav li {
+            margin: 0;
+        }
+
+        #main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+
+        #main-nav a:hover {
+            background-color: #34495e;
+        }
+
+        /* Основной контент */
+        main {
+            background-color: white;
+            padding: 30px 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Таблица */
+        #custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        #custom-table th,
+        #custom-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        #custom-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        #custom-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #custom-table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        #custom-table tr:hover {
+            background-color: #e8f4fc;
+        }
+
+        /* Форма */
+        form {
+            max-width: 600px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Подвал */
+        #footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        /* Ссылки */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .disabled-link {
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Списки */
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            #header .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .site-title {
+                margin: 10px 0;
+                order: 2;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            #main-nav {
+                order: 3;
+                margin-top: 10px;
+            }
+            
+            #main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .site-title h1 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Список гиперссылок</h1>
-    
-    <ol>
-        <li>
-            <a href="http://kubsu.ru">Абсолютная гиперссылка на главную страницу kubsu.ru</a>
-        </li>
-        
-        <li>
-            <a href="https://kubsu.ru">Абсолютная гиперссылка на главную kubsu.ru (HTTPS)</a>
-        </li>
-        
-        <li>
-            <a href="https://kubsu.ru">
-                <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="300" height="200">
-            </a>
-        </li>
-        
-        <li>
-            <a href="https://www.clipr.cc/1gVNb">Сокращенная ссылка на внутреннюю страницу</a>
-        </li>
-        
-        <li>
-            <a href="https://www.clipr.cc/v11hP">Сокращенная ссылка на главную страницу</a>
-        </li>
-        
-        <li>
-            <a href="#section-name">Перейти к разделу</a>
-        </li>
-        
-        <li>
-           <li>
-      <a href="https://www.kubsu.ru/ru/search?key=программирование" target="_blank">Ссылка с тремя параметрами в URL </a>
-    </li> 
-    
-    <li>
-      <a href="https://www.kubsu.ru/ru/education/programs?id=1" target="_blank">Ссылка с параметром id в URL</a>
-    </li> 
-    
-    <li>
-      <a href="https://kubsu.ru/ru/news" target="_blank"> Относительная ссылка на страницу в текущем каталоге</a>
-    </li> 
-    
-    <li>
-      <a href="https://kubsu.ru/ru/about" target="_blank">Относительная ссылка на страницу в каталоге about</a>
-    </li> 
-    
-    <li>
-      <a href="https://kubsu.ru/ru" target="_blank">Относительная ссылка на страницу в каталоге уровнем выше текущего</a>
-    </li> 
-    
-    <li>
-      <a href="https://kubsu.ru" target="_blank">Относительная ссылка на страницу в каталоге двумя уровнями выше</a>
-    </li> 
-        
-        <li>
-            <p>Это абзац текста с <a href="https://kubsu.ru">контекстной ссылкой</a> внутри него.</p>
-        </li>
-        
-        <li>
-            <a href="https://example.com/about#team">Ссылка на фрагмент страницы стороннего сайта</a>
-        </li>
-        
-        <li>
-            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" usemap="#image-map">
-            <map name="image-map">
-                <area shape="rect" coords="24,18, 210, 56" href="https://kubsu.ru" alt="Прямоугольная область">
-                <area shape="circle" coords="230, 340, 100" href="https://kubsu.ru" alt="Круглая область">
-            </map>
-        </li>
-        
-        <li>
-            <a href="">Ссылка с пустым href</a>
-        </li>
-        
-        <li>
-            <a class="disabled-link">КубГУ официальный сайт</a>
-        </li>
-        
-        <li>
-            <a href="https://kubsu.ru" rel="nofollow">Ссылка с запретом перехода для поисковиков</a>
-        </li>
-        
-        <li>
-            <a href="https://kubsu.ru" rel="noindex">Ссылка, запрещенная для индексации</a>
-        </li>
-        
-        <li>
-            <ol>
-                <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ">Кубанский государственный университет</a></li>
-                <li><a href="https://kubsu.ru/university" title="Информация об университете">Об университете</a></li>
-                <li><a href="https://kubsu.ru/education" title="Образовательные программы">Образование</a></li>
-            </ol>
-        </li>
-        
-        <li>
-            <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" target="_blank">Ссылка на файл на сервере FTP </a>
-</a>
-        </li>
-    </ol>
-   
-    <head>
-    <title>Анкета разработчика</title>
-</head>
-    <h1>Анкета разработчика</h1>
-    
-    <form action="/"
-        method="POST">
-        
-        <label>
-            ФИО:<br />
-            <input name="fio"
-                type="text"
-                placeholder="Введите ваше ФИО"
-                required />
-        </label><br /><br />
-        
-        <label>
-            Телефон:<br />
-            <input name="phone"
-                type="tel"
-                placeholder="+7-XXX-XXX-XX-XX"
-                pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
-                required />
-        </label><br /><br />
-        
-        <label>
-            E-mail:<br />
-            <input name="email"
-                type="email"
-                placeholder="example@mail.ru"
-                required />
-        </label><br /><br />
-        
-        <label>
-            Дата рождения:<br />
-            <input name="birthdate"
-                type="date"
-                required />
-        </label><br /><br />
-        
-        Пол:<br />
-        <label>
-            <input type="radio"
-                name="gender"
-                value="male"
-                required />
-            Мужской
-        </label>
-        <label>
-            <input type="radio"
-                name="gender"
-                value="female"
-                required />
-            Женский
-        </label><br /><br />
-        
-        <label>
-            Любимый язык программирования:<br />
-            <select name="languages[]"
-                multiple="multiple"
-                size="6">
-                <option value="pascal">Pascal</option>
-                <option value="c">C</option>
-                <option value="cpp">C++</option>
-                <option value="javascript">JavaScript</option>
-                <option value="php">PHP</option>
-                <option value="python">Python</option>
-                <option value="java">Java</option>
-                <option value="haskel">Haskel</option>
-                <option value="clojure">Clojure</option>
-                <option value="prolog">Prolog</option>
-                <option value="scala">Scala</option>
-            </select>
-        </label><br /><br />
-        
-        <label>
-            Биография:<br />
-            <textarea name="bio"
-                placeholder="Расскажите о себе..."
-                rows="5"
-                cols="50"></textarea>
-        </label><br /><br />
-        
-        <label>
-            <input type="checkbox"
-                name="agreement"
-                required />
-            С контрактом ознакомлен(а)
-        </label><br /><br />
-        
-        <input type="submit" value="Сохранить" />
-    </form>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <img id="logo" src="https://egorgusev2.github.io/image1.png" width="50" height="50">
+            </div>
+            <div class="site-title">
+                <h1>Кубанский государственный университет</h1>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#hyperlinks">Ссылки</a></li>
+                    <li><a href="#table">Таблица</a></li>
+                    <li><a href="#form">Форма</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <main class="container">
+        <section id="hyperlinks">
+            <h2>Список гиперссылок</h2>
+            
+            <ol>
+                <li>
+                    <a href="http://kubsu.ru">Абсолютная гиперссылка на главную страницу kubsu.ru</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru">Абсолютная гиперссылка на главную kubsu.ru (HTTPS)</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru">
+                        <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="300" height="200">
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://www.clipr.cc/1gVNb">Сокращенная ссылка на внутреннюю страницу</a>
+                </li>
+                
+                <li>
+                    <a href="https://www.clipr.cc/v11hP">Сокращенная ссылка на главную страницу</a>
+                </li>
+                
+                <li>
+                    <a href="#section-name">Перейти к разделу</a>
+                </li>
+                
+                <li>
+                    <a href="https://www.kubsu.ru/ru/search?key=программирование" target="_blank">Ссылка с тремя параметрами в URL</a>
+                </li>
+                
+                <li>
+                    <a href="https://www.kubsu.ru/ru/education/programs?id=1" target="_blank">Ссылка с параметром id в URL</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru/ru/news" target="_blank">Относительная ссылка на страницу в текущем каталоге</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru/ru/about" target="_blank">Относительная ссылка на страницу в каталоге about</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru/ru" target="_blank">Относительная ссылка на страницу в каталоге уровнем выше текущего</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru" target="_blank">Относительная ссылка на страницу в каталоге двумя уровнями выше</a>
+                </li>
+                
+                <li>
+                    <p>Это абзац текста с <a href="https://kubsu.ru">контекстной ссылкой</a> внутри него.</p>
+                </li>
+                
+                <li>
+                    <a href="https://example.com/about#team">Ссылка на фрагмент страницы стороннего сайта</a>
+                </li>
+                
+                <li>
+                    <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" usemap="#image-map">
+                    <map name="image-map">
+                        <area shape="rect" coords="24,18, 210, 56" href="https://kubsu.ru" alt="Прямоугольная область">
+                        <area shape="circle" coords="230, 340, 100" href="https://kubsu.ru" alt="Круглая область">
+                    </map>
+                </li>
+                
+                <li>
+                    <a href="">Ссылка с пустым href</a>
+                </li>
+                
+                <li>
+                    <a class="disabled-link">КубГУ официальный сайт</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru" rel="nofollow">Ссылка с запретом перехода для поисковиков</a>
+                </li>
+                
+                <li>
+                    <a href="https://kubsu.ru" rel="noindex">Ссылка, запрещенная для индексации</a>
+                </li>
+                
+                <li>
+                    <ol>
+                        <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ">Кубанский государственный университет</a></li>
+                        <li><a href="https://kubsu.ru/university" title="Информация об университете">Об университете</a></li>
+                        <li><a href="https://kubsu.ru/education" title="Образовательные программы">Образование</a></li>
+                    </ol>
+                </li>
+                
+                <li>
+                    <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" target="_blank">Ссылка на файл на сервере FTP</a>
+                </li>
+            </ol>
+        </section>
+
+        <section id="table">
+            <h2>Таблица</h2>
+            <table id="custom-table">
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Должность</th>
+                        <th>Отдел</th>
+                        <th>Стаж работы</th>
+                        <th>Зарплата</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Иванов И.И.</td>
+                        <td>Разработчик</td>
+                        <td>IT</td>
+                        <td>5 лет</td>
+                        <td>150000 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Петров П.П.</td>
+                        <td>Аналитик</td>
+                        <td>IT</td>
+                        <td>3 года</td>
+                        <td>120000 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Сидоров С.С.</td>
+                        <td>Тестировщик</td>
+                        <td>QA</td>
+                        <td>2 года</td>
+                        <td>90000 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Кузнецов К.К.</td>
+                        <td>Дизайнер</td>
+                        <td rowspan="2">UX/UI</td>
+                        <td>4 года</td>
+                        <td>110000 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Смирнова А.А.</td>
+                        <td>Дизайнер</td>
+                        <td>1 год</td>
+                        <td>80000 руб.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">ИТОГО сотрудников:</td>
+                        <td colspan="3">5 человек</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="form">
+            <h2>Анкета разработчика</h2>
+            
+            <form action="/" method="POST">
+                
+                <label>
+                    ФИО:<br />
+                    <input name="fio"
+                        type="text"
+                        placeholder="Введите ваше ФИО"
+                        required />
+                </label><br /><br />
+                
+                <label>
+                    Телефон:<br />
+                    <input name="phone"
+                        type="tel"
+                        placeholder="+7-XXX-XXX-XX-XX"
+                        pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                        required />
+                </label><br /><br />
+                
+                <label>
+                    E-mail:<br />
+                    <input name="email"
+                        type="email"
+                        placeholder="example@mail.ru"
+                        required />
+                </label><br /><br />
+                
+                <label>
+                    Дата рождения:<br />
+                    <input name="birthdate"
+                        type="date"
+                        required />
+                </label><br /><br />
+                
+                Пол:<br />
+                <label>
+                    <input type="radio"
+                        name="gender"
+                        value="male"
+                        required />
+                    Мужской
+                </label>
+                <label>
+                    <input type="radio"
+                        name="gender"
+                        value="female"
+                        required />
+                    Женский
+                </label><br /><br />
+                
+                <label>
+                    Любимый язык программирования:<br />
+                    <select name="languages[]"
+                        multiple="multiple"
+                        size="6">
+                        <option value="pascal">Pascal</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="php">PHP</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="haskel">Haskel</option>
+                        <option value="clojure">Clojure</option>
+                        <option value="prolog">Prolog</option>
+                        <option value="scala">Scala</option>
+                    </select>
+                </label><br /><br />
+                
+                <label>
+                    Биография:<br />
+                    <textarea name="bio"
+                        placeholder="Расскажите о себе..."
+                        rows="5"
+                        cols="50"></textarea>
+                </label><br /><br />
+                
+                <label>
+                    <input type="checkbox"
+                        name="agreement"
+                        required />
+                    С контрактом ознакомлен(а)
+                </label><br /><br />
+                
+                <input type="submit" value="Сохранить" />
+            </form>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container">
+            <p>&copy; (с) Сеничев Тимофей</p>
+        </div>
+    </footer>
 </body>
 </html>
