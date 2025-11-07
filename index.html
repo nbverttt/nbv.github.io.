@@ -4,529 +4,712 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Разработка пользовательского Web-интерфейса</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        /* Общие стили */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Шапка */
-        #header {
-            background-color: #2c3e50;
-            color: white;
-            width: 100%;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        #header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            border-radius: 5px;
-            display: block;
-        }
-
-        .site-title {
-            flex: 1;
-            text-align: center;
-            margin: 0 20px;
-        }
-
-        .site-title h1 {
-            font-size: 1.5em;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        /* Навигация */
-        #main-nav {
-            flex: 0 0 auto;
-        }
-
-        #main-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            margin: 0;
-            padding: 0;
-        }
-
-        #main-nav li {
-            margin: 0;
-        }
-
-        #main-nav a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 3px;
-            transition: background-color 0.3s;
-            display: block;
-            white-space: nowrap;
-        }
-
-        #main-nav a:hover {
-            background-color: #34495e;
-        }
-
-        /* Основной контент */
-        main {
-            background-color: white;
-            padding: 30px 20px;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        section {
-            margin-bottom: 40px;
-        }
-
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        /* Таблица */
-        #custom-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        #custom-table th,
-        #custom-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        #custom-table th {
+        .custom-table th {
             background-color: #3498db;
             color: white;
-            font-weight: bold;
         }
-
-        #custom-table tr:nth-child(even) {
-            background-color: #f2f2f2;
+        
+        .custom-table tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
-
-        #custom-table tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        #custom-table tr:hover {
+        
+        .custom-table tr:hover {
             background-color: #e8f4fc;
         }
-
-        /* Форма */
-        form {
-            max-width: 600px;
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="tel"],
-        input[type="email"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        input[type="radio"],
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        input[type="submit"] {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-
-        /* Подвал */
-        #footer {
+        
+        .navbar-custom {
             background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            width: 100%;
-            margin-top: 40px;
         }
-
-        /* Ссылки */
-        a {
-            color: #3498db;
-            text-decoration: none;
+        
+        .footer-custom {
+            background-color: #2c3e50;
         }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
+        
         .disabled-link {
-            color: #999;
+            color: #6c757d;
             cursor: not-allowed;
         }
-
-        /* Списки */
-        ol {
-            padding-left: 20px;
+        
+        .calculator-card {
+            border-left: 4px solid #3498db;
         }
-
-        li {
-            margin-bottom: 10px;
+        
+        .service-calculator-card {
+            border-left: 4px solid #e74c3c;
         }
-
-        /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            #header .container {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
+        
+        .gallery-card {
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .result-alert {
+            display: none;
+        }
+        
+        .dynamic-field {
+            display: none;
+        }
+        
+        .price-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #27ae60;
+            text-align: center;
+            padding: 1rem;
+            background-color: #f8fff9;
+            border-radius: 0.5rem;
+            border: 2px solid #27ae60;
+        }
+        
+        /* Стили для галереи */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: #f8f9fa;
+            padding: 1rem 0;
+        }
+        
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .gallery-item {
+            flex: 0 0 calc(33.333% - 0.67rem);
+            min-width: 0;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+        }
+        
+        .gallery-image.active {
+            border-color: #e74c3c;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-btn:hover:not(:disabled) {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .gallery-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .gallery-pager {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .pager-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pager-dot.active {
+            background: #3498db;
+            transform: scale(1.2);
+        }
+        
+        .pager-info {
+            margin: 0 1rem;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        /* Стили для модального окна */
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+        
+        .image-counter {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile First дополнительные стили */
+        @media (max-width: 767.98px) {
+            .table-responsive {
+                font-size: 0.875rem;
             }
             
-            .site-title {
-                margin: 10px 0;
-                order: 2;
-            }
-            
-            .logo {
+            .mobile-order-1 {
                 order: 1;
             }
             
-            #main-nav {
-                order: 3;
-                margin-top: 10px;
+            .mobile-order-2 {
+                order: 2;
             }
             
-            #main-nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+            .price-display {
+                font-size: 1.2rem;
             }
             
-            .site-title h1 {
-                font-size: 1.2em;
+            .gallery-item {
+                flex: 0 0 calc(100% - 1rem);
+            }
+            
+            .gallery-image {
+                height: 250px;
+            }
+            
+            .gallery-controls {
+                gap: 1rem;
+            }
+            
+            .gallery-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .gallery-item {
+                flex: 0 0 calc(50% - 0.5rem);
             }
         }
     </style>
 </head>
 <body>
-    <header id="header">
+    <!-- Шапка -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <div class="logo">
-                <img id="logo" src="https://egorgusev2.github.io/image1.png" width="50" height="50">
+            <!-- Логотип -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="40" height="40" class="me-2 rounded">
+                <span class="d-none d-md-inline">КубГУ</span>
+            </a>
+            
+            <!-- Название сайта -->
+            <div class="navbar-brand mx-auto text-center">
+                <h1 class="h5 mb-0">Кубанский государственный университет</h1>
             </div>
-            <div class="site-title">
-                <h1>Кубанский государственный университет</h1>
-            </div>
-            <nav id="main-nav">
-                <ul>
-                    <li><a href="#hyperlinks">Ссылки</a></li>
-                    <li><a href="#table">Таблица</a></li>
-                    <li><a href="#form">Форма</a></li>
+            
+            <!-- Кнопка для мобильного меню -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Навигация -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hyperlinks">Ссылки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#table">Таблица</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#form">Форма</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculator">Калькулятор товаров</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#service-calculator">Калькулятор услуг</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Галерея</a>
+                    </li>
                 </ul>
-            </nav>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="container">
-        <section id="hyperlinks">
-            <h2>Список гиперссылок</h2>
+    <!-- Основной контент -->
+    <main class="container my-4">
+        <div class="row">
+            <!-- Таблица - на мобильных показывается первой -->
+            <div class="col-12 col-lg-8 mobile-order-1">
+                <section id="table" class="mb-5">
+                    <h2 class="section-title">Таблица сотрудников</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover custom-table">
+                            <thead>
+                                <tr>
+                                    <th>ФИО</th>
+                                    <th>Должность</th>
+                                    <th>Отдел</th>
+                                    <th>Стаж работы</th>
+                                    <th>Зарплата</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Иванов И.И.</td>
+                                    <td>Разработчик</td>
+                                    <td>IT</td>
+                                    <td>5 лет</td>
+                                    <td>150000 руб.</td>
+                                </tr>
+                                <tr>
+                                    <td>Петров П.П.</td>
+                                    <td>Аналитик</td>
+                                    <td>IT</td>
+                                    <td>3 года</td>
+                                    <td>120000 руб.</td>
+                                </tr>
+                                <tr>
+                                    <td>Сидоров С.С.</td>
+                                    <td>Тестировщик</td>
+                                    <td>QA</td>
+                                    <td>2 года</td>
+                                    <td>90000 руб.</td>
+                                </tr>
+                                <tr>
+                                    <td>Кузнецов К.К.</td>
+                                    <td>Дизайнер</td>
+                                    <td rowspan="2">UX/UI</td>
+                                    <td>4 года</td>
+                                    <td>110000 руб.</td>
+                                </tr>
+                                <tr>
+                                    <td>Смирнова А.А.</td>
+                                    <td>Дизайнер</td>
+                                    <td>1 год</td>
+                                    <td>80000 руб.</td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td colspan="2"><strong>ИТОГО сотрудников:</strong></td>
+                                    <td colspan="3"><strong>5 человек</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
             
-            <ol>
-                <li>
-                    <a href="http://kubsu.ru">Абсолютная гиперссылка на главную страницу kubsu.ru</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru">Абсолютная гиперссылка на главную kubsu.ru (HTTPS)</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru">
-                        <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="300" height="200">
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="https://www.clipr.cc/1gVNb">Сокращенная ссылка на внутреннюю страницу</a>
-                </li>
-                
-                <li>
-                    <a href="https://www.clipr.cc/v11hP">Сокращенная ссылка на главную страницу</a>
-                </li>
-                
-                <li>
-                    <a href="#section-name">Перейти к разделу</a>
-                </li>
-                
-                <li>
-                    <a href="https://www.kubsu.ru/ru/search?key=программирование" target="_blank">Ссылка с тремя параметрами в URL</a>
-                </li>
-                
-                <li>
-                    <a href="https://www.kubsu.ru/ru/education/programs?id=1" target="_blank">Ссылка с параметром id в URL</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru/ru/news" target="_blank">Относительная ссылка на страницу в текущем каталоге</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru/ru/about" target="_blank">Относительная ссылка на страницу в каталоге about</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru/ru" target="_blank">Относительная ссылка на страницу в каталоге уровнем выше текущего</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru" target="_blank">Относительная ссылка на страницу в каталоге двумя уровнями выше</a>
-                </li>
-                
-                <li>
-                    <p>Это абзац текста с <a href="https://kubsu.ru">контекстной ссылкой</a> внутри него.</p>
-                </li>
-                
-                <li>
-                    <a href="https://example.com/about#team">Ссылка на фрагмент страницы стороннего сайта</a>
-                </li>
-                
-                <li>
-                    <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" usemap="#image-map">
-                    <map name="image-map">
-                        <area shape="rect" coords="24,18, 210, 56" href="https://kubsu.ru" alt="Прямоугольная область">
-                        <area shape="circle" coords="230, 340, 100" href="https://kubsu.ru" alt="Круглая область">
-                    </map>
-                </li>
-                
-                <li>
-                    <a href="">Ссылка с пустым href</a>
-                </li>
-                
-                <li>
-                    <a class="disabled-link">КубГУ официальный сайт</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru" rel="nofollow">Ссылка с запретом перехода для поисковиков</a>
-                </li>
-                
-                <li>
-                    <a href="https://kubsu.ru" rel="noindex">Ссылка, запрещенная для индексации</a>
-                </li>
-                
-                <li>
-                    <ol>
-                        <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ">Кубанский государственный университет</a></li>
-                        <li><a href="https://kubsu.ru/university" title="Информация об университете">Об университете</a></li>
-                        <li><a href="https://kubsu.ru/education" title="Образовательные программы">Образование</a></li>
-                    </ol>
-                </li>
-                
-                <li>
-                    <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" target="_blank">Ссылка на файл на сервере FTP</a>
-                </li>
-            </ol>
-        </section>
+            <!-- Список ссылок - на мобильных показывается второй -->
+            <div class="col-12 col-lg-4 mobile-order-2">
+                <section id="hyperlinks" class="mb-5">
+                    <h2 class="section-title">Список гиперссылок</h2>
+                    <div class="list-group">
+                        <a href="http://kubsu.ru" class="list-group-item list-group-item-action">
+                            Абсолютная гиперссылка на главную страницу kubsu.ru
+                        </a>
+                        <a href="https://kubsu.ru" class="list-group-item list-group-item-action">
+                            Абсолютная гиперссылка на главную kubsu.ru (HTTPS)
+                        </a>
+                        <a href="https://kubsu.ru" class="list-group-item list-group-item-action">
+                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" class="img-fluid rounded mb-2" style="max-height: 100px;">
+                            Ссылка с изображением
+                        </a>
+                        <a href="https://www.clipr.cc/1gVNb" class="list-group-item list-group-item-action">
+                            Сокращенная ссылка на внутреннюю страницу
+                        </a>
+                        <a href="https://www.clipr.cc/v11hP" class="list-group-item list-group-item-action">
+                            Сокращенная ссылка на главную страницу
+                        </a>
+                        <a href="#section-name" class="list-group-item list-group-item-action">
+                            Перейти к разделу
+                        </a>
+                        <a href="https://www.kubsu.ru/ru/search?key=программирование" class="list-group-item list-group-item-action" target="_blank">
+                            Ссылка с тремя параметрами в URL
+                        </a>
+                        <a href="https://www.kubsu.ru/ru/education/programs?id=1" class="list-group-item list-group-item-action" target="_blank">
+                            Ссылка с параметром id в URL
+                        </a>
+                        <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action" target="_blank">
+                            Относительная ссылка на страницу в текущем каталоге
+                        </a>
+                        <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action" target="_blank">
+                            Относительная ссылка на страницу в каталоге about
+                        </a>
+                        <a href="https://kubsu.ru/ru" class="list-group-item list-group-item-action" target="_blank">
+                            Относительная ссылка на страницу в каталоге уровнем выше
+                        </a>
+                        <a href="https://kubsu.ru" class="list-group-item list-group-item-action" target="_blank">
+                            Относительная ссылка на страницу в каталоге двумя уровнями выше
+                        </a>
+                        <div class="list-group-item">
+                            <p class="mb-0">Это абзац текста с <a href="https://kubsu.ru">контекстной ссылкой</a> внутри него.</p>
+                        </div>
+                        <a href="https://example.com/about#team" class="list-group-item list-group-item-action">
+                            Ссылка на фрагмент страницы стороннего сайта
+                        </a>
+                        <div class="list-group-item">
+                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" class="img-fluid rounded" usemap="#image-map">
+                            <map name="image-map">
+                                <area shape="rect" coords="24,18, 210, 56" href="https://kubsu.ru" alt="Прямоугольная область">
+                                <area shape="circle" coords="230, 340, 100" href="https://kubsu.ru" alt="Круглая область">
+                            </map>
+                        </div>
+                        <a href="" class="list-group-item list-group-item-action disabled">
+                            Ссылка с пустым href
+                        </a>
+                        <span class="list-group-item disabled-link">
+                            КубГУ официальный сайт
+                        </span>
+                        <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="nofollow">
+                            Ссылка с запретом перехода для поисковиков
+                        </a>
+                        <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="noindex">
+                            Ссылка, запрещенная для индексации
+                        </a>
+                        <div class="list-group-item">
+                            <ol class="mb-0">
+                                <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ">Кубанский государственный университет</a></li>
+                                <li><a href="https://kubsu.ru/university" title="Информация об университете">Об университете</a></li>
+                                <li><a href="https://kubsu.ru/education" title="Образовательные программы">Образование</a></li>
+                            </ol>
+                        </div>
+                        <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" class="list-group-item list-group-item-action" target="_blank">
+                            Ссылка на файл на сервере FTP
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Галерея -->
+        <div class="row">
+            <div class="col-12">
+                <section id="gallery" class="mb-5">
+                    <h2 class="section-title">Галерея изображений</h2>
+                    <div class="card gallery-card">
+                        <div class="card-body">
+                            <div class="gallery-container">
+                                <div class="gallery-slider" id="gallerySlider">
+                                    <!-- Изображения с разными тематиками для лучшей видимости -->
+                                    <div class="gallery-item">
+                                        <img src="https://i.pinimg.com/originals/ef/34/71/ef3471a5c5454bd9fcbabd79f26a7cba.jpg" alt="Горы и природа" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=1&grayscale" data-index="1">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=2" alt="Городской пейзаж" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=2" data-index="2">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=3&blur=2" alt="Архитектура" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=3&blur=2" data-index="3">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=4" alt="Технологии" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=4" data-index="4">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=5&grayscale" alt="Черно-белое фото" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=5&grayscale" data-index="5">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=6" alt="Искусство" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=6" data-index="6">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=7&blur=1" alt="Абстракция" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=7&blur=1" data-index="7">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="https://picsum.photos/400/300?random=8" alt="Наука" class="gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="https://picsum.photos/800/600?random=8" data-index="8">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery-controls">
+                                <button class="gallery-btn" id="prevBtn" disabled>
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                
+                                <div class="gallery-pager">
+                                    <div class="pager-dot active" data-page="0"></div>
+                                    <div class="pager-dot" data-page="1"></div>
+                                    <div class="pager-dot" data-page="2"></div>
+                                    <div class="pager-dot" data-page="3"></div>
+                                    <div class="pager-dot" data-page="4"></div>
+                                    <div class="pager-dot" data-page="5"></div>
+                                    <div class="pager-dot" data-page="6"></div>
+                                    <div class="pager-dot" data-page="7"></div>
+                                </div>
+                                
+                                <button class="gallery-btn" id="nextBtn">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="text-center mt-2">
+                                <span class="pager-info" id="pageInfo">Страница 1 из 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
 
-        <section id="table">
-            <h2>Таблица</h2>
-            <table id="custom-table">
-                <thead>
-                    <tr>
-                        <th>ФИО</th>
-                        <th>Должность</th>
-                        <th>Отдел</th>
-                        <th>Стаж работы</th>
-                        <th>Зарплата</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Иванов И.И.</td>
-                        <td>Разработчик</td>
-                        <td>IT</td>
-                        <td>5 лет</td>
-                        <td>150000 руб.</td>
-                    </tr>
-                    <tr>
-                        <td>Петров П.П.</td>
-                        <td>Аналитик</td>
-                        <td>IT</td>
-                        <td>3 года</td>
-                        <td>120000 руб.</td>
-                    </tr>
-                    <tr>
-                        <td>Сидоров С.С.</td>
-                        <td>Тестировщик</td>
-                        <td>QA</td>
-                        <td>2 года</td>
-                        <td>90000 руб.</td>
-                    </tr>
-                    <tr>
-                        <td>Кузнецов К.К.</td>
-                        <td>Дизайнер</td>
-                        <td rowspan="2">UX/UI</td>
-                        <td>4 года</td>
-                        <td>110000 руб.</td>
-                    </tr>
-                    <tr>
-                        <td>Смирнова А.А.</td>
-                        <td>Дизайнер</td>
-                        <td>1 год</td>
-                        <td>80000 руб.</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">ИТОГО сотрудников:</td>
-                        <td colspan="3">5 человек</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="form">
-            <h2>Анкета разработчика</h2>
-            
-            <form action="/" method="POST">
-                
-                <label>
-                    ФИО:<br />
-                    <input name="fio"
-                        type="text"
-                        placeholder="Введите ваше ФИО"
-                        required />
-                </label><br /><br />
-                
-                <label>
-                    Телефон:<br />
-                    <input name="phone"
-                        type="tel"
-                        placeholder="+7-XXX-XXX-XX-XX"
-                        pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
-                        required />
-                </label><br /><br />
-                
-                <label>
-                    E-mail:<br />
-                    <input name="email"
-                        type="email"
-                        placeholder="example@mail.ru"
-                        required />
-                </label><br /><br />
-                
-                <label>
-                    Дата рождения:<br />
-                    <input name="birthdate"
-                        type="date"
-                        required />
-                </label><br /><br />
-                
-                Пол:<br />
-                <label>
-                    <input type="radio"
-                        name="gender"
-                        value="male"
-                        required />
-                    Мужской
-                </label>
-                <label>
-                    <input type="radio"
-                        name="gender"
-                        value="female"
-                        required />
-                    Женский
-                </label><br /><br />
-                
-                <label>
-                    Любимый язык программирования:<br />
-                    <select name="languages[]"
-                        multiple="multiple"
-                        size="6">
-                        <option value="pascal">Pascal</option>
-                        <option value="c">C</option>
-                        <option value="cpp">C++</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="php">PHP</option>
-                        <option value="python">Python</option>
-                        <option value="java">Java</option>
-                        <option value="haskel">Haskel</option>
-                        <option value="clojure">Clojure</option>
-                        <option value="prolog">Prolog</option>
-                        <option value="scala">Scala</option>
-                    </select>
-                </label><br /><br />
-                
-                <label>
-                    Биография:<br />
-                    <textarea name="bio"
-                        placeholder="Расскажите о себе..."
-                        rows="5"
-                        cols="50"></textarea>
-                </label><br /><br />
-                
-                <label>
-                    <input type="checkbox"
-                        name="agreement"
-                        required />
-                    С контрактом ознакомлен(а)
-                </label><br /><br />
-                
-                <input type="submit" value="Сохранить" />
-            </form>
-        </section>
+        <!-- Модальное окно для просмотра изображений -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Просмотр изображения</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center position-relative">
+                        <span class="image-counter" id="imageCounter">1 / 8</span>
+                        <img src="" alt="" class="modal-image" id="modalImage">
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-outline-primary" id="modalPrevBtn">
+                            <i class="bi bi-chevron-left me-1"></i>Предыдущее
+                        </button>
+                        <button class="btn btn-outline-primary" id="modalNextBtn">
+                            Следующее<i class="bi bi-chevron-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Калькулятор товаров -->
+        <div class="row">
+            <div class="col-12">
+                <section id="calculator" class="mb-5">
+                    <h2 class="section-title">Калькулятор стоимости заказа</h2>
+                    <div class="card calculator-card">
+                        <div class="card-body">
+                            <!-- ... остальной код калькулятора товаров ... -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Калькулятор услуг -->
+        <div class="row">
+            <div class="col-12">
+                <section id="service-calculator" class="mb-5">
+                    <h2 class="section-title">Калькулятор стоимости услуги</h2>
+                    <div class="card service-calculator-card">
+                        <div class="card-body">
+                            <!-- ... остальной код калькулятора услуг ... -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Форма - занимает всю ширину -->
+        <div class="row">
+            <div class="col-12">
+                <section id="form">
+                    <h2 class="section-title">Анкета разработчика</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- ... остальной код формы ... -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </main>
 
-    <footer id="footer">
+    <!-- Подвал -->
+    <footer class="footer-custom text-white py-4 mt-5">
         <div class="container">
-            <p>&copy; (с) Сеничев Тимофей</p>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; Сергей Синица 2023</p>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript для всего сайта -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... существующий код калькуляторов ...
+
+            // Галерея
+            const gallerySlider = document.getElementById('gallerySlider');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pagerDots = document.querySelectorAll('.pager-dot');
+            const pageInfo = document.getElementById('pageInfo');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+
+            // Элементы модального окна
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const imageCounter = document.getElementById('imageCounter');
+            const modalPrevBtn = document.getElementById('modalPrevBtn');
+            const modalNextBtn = document.getElementById('modalNextBtn');
+
+            let currentPage = 0;
+            let itemsPerPage = 3;
+            let totalPages = 0;
+            let currentModalIndex = 0;
+
+            // Определяем количество элементов на странице в зависимости от размера экрана
+            function updateItemsPerPage() {
+                if (window.innerWidth < 768) {
+                    itemsPerPage = 1;
+                } else if (window.innerWidth < 992) {
+                    itemsPerPage = 2;
+                } else {
+                    itemsPerPage = 3;
+                }
+                totalPages = Math.ceil(8 / itemsPerPage);
+                updateGallery();
+            }
+
+            function updateGallery() {
+                const translateX = -currentPage * (100 / itemsPerPage);
+                gallerySlider.style.transform = `translateX(${translateX}%)`;
+                
+                // Обновляем состояние кнопок
+                prevBtn.disabled = currentPage === 0;
+                nextBtn.disabled = currentPage === totalPages - 1;
+                
+                // Обновляем пейджер
+                pagerDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentPage);
+                    dot.style.display = index < totalPages ? 'block' : 'none';
+                });
+                
+                // Обновляем информацию о странице
+                pageInfo.textContent = `Страница ${currentPage + 1} из ${totalPages}`;
+            }
+
+            function goToPage(page) {
+                currentPage = page;
+                updateGallery();
+            }
+
+            function nextPage() {
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    updateGallery();
+                }
+            }
+
+            function prevPage() {
+                if (currentPage > 0) {
+                    currentPage--;
+                    updateGallery();
+                }
+            }
+
+            // Функции для модального окна
+            function openModal(index) {
+                currentModalIndex = index;
+                const imageSrc = galleryImages[index].getAttribute('data-image');
+                modalImage.src = imageSrc;
+                imageCounter.textContent = `${index + 1} / 8`;
+                
+                // Обновляем состояние кнопок в модальном окне
+                modalPrevBtn.disabled = currentModalIndex === 0;
+                modalNextBtn.disabled = currentModalIndex === 7;
+            }
+
+            function nextImage() {
+                if (currentModalIndex < 7) {
+                    currentModalIndex++;
+                    openModal(currentModalIndex);
+                }
+            }
+
+            function prevImage() {
+                if (currentModalIndex > 0) {
+                    currentModalIndex--;
+                    openModal(currentModalIndex);
+                }
+            }
+
+            // Слушатели событий для галереи
+            prevBtn.addEventListener('click', prevPage);
+            nextBtn.addEventListener('click', nextPage);
+
+            pagerDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const page = parseInt(this.getAttribute('data-page'));
+                    if (page < totalPages) {
+                        goToPage(page);
+                    }
+                });
+            });
+
+          
+            galleryImages.forEach((image, index) => {
+                image.addEventListener('click', function() {
+                    openModal(index);
+                });
+            });
+
+            // Слушатели для навигации в модальном окне
+            modalPrevBtn.addEventListener('click', prevImage);
+            modalNextBtn.addEventListener('click', nextImage);
+
+            // Обработчик изменения размера окна
+            window.addEventListener('resize', updateItemsPerPage);
+
+            // Инициализация галереи
+            updateItemsPerPage();
+
+            // ... существующие функции formatCurrency и другие ...
+        });
+    </script>
 </body>
 </html>
