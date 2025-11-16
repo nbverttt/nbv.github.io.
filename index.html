@@ -290,6 +290,23 @@
         .bg-light-custom {
             background-color: #f8f9fa;
         }
+
+        /* Ссылки с изображениями */
+        .img-link {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .img-link img {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Карта изображения */
+        .image-map-container {
+            position: relative;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -363,16 +380,98 @@
                 <!-- Ссылки -->
                 <div class="col-12 col-lg-4">
                     <section id="hyperlinks">
-                        <h2 class="section-title">Полезные ссылки</h2>
+                        <h2 class="section-title">Список гиперссылок</h2>
                         <div class="card content-card">
                             <div class="card-body p-0">
                                 <div class="list-group list-group-flush">
-                                    <a href="http://kubsu.ru" class="list-group-item list-group-item-action">Главная страница КубГУ</a>
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action">КубГУ (HTTPS)</a>
-                                    <a href="https://kubsu.ru/university" class="list-group-item list-group-item-action">Об университете</a>
-                                    <a href="https://kubsu.ru/education" class="list-group-item list-group-item-action">Образование</a>
-                                    <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action">Новости</a>
-                                    <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action">О нас</a>
+                                    <a href="http://kubsu.ru" class="list-group-item list-group-item-action">
+                                        Абсолютная гиперссылка на главную страницу kubsu.ru
+                                    </a>
+                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action">
+                                        Абсолютная гиперссылка на главную kubsu.ru (HTTPS)
+                                    </a>
+                                    
+                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action img-link">
+                                        <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" class="img-fluid rounded" style="max-height: 80px;">
+                                        Ссылка с изображением на главную КубГУ
+                                    </a>
+                                    
+                                    <a href="https://www.clipr.cc/1gVNb" class="list-group-item list-group-item-action">
+                                        Сокращенная ссылка на внутреннюю страницу
+                                    </a>
+                                    <a href="https://www.clipr.cc/v11hP" class="list-group-item list-group-item-action">
+                                        Сокращенная ссылка на главную страницу
+                                    </a>
+                                    
+                                    <a href="#section-name" class="list-group-item list-group-item-action">
+                                        Перейти к разделу (якорная ссылка)
+                                    </a>
+                                    
+                                    <a href="https://www.kubsu.ru/ru/search?key=программирование" class="list-group-item list-group-item-action" target="_blank">
+                                        Ссылка с тремя параметрами в URL
+                                    </a>
+                                    <a href="https://www.kubsu.ru/ru/education/programs?id=1" class="list-group-item list-group-item-action" target="_blank">
+                                        Ссылка с параметром id в URL
+                                    </a>
+                                    
+                                    <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action" target="_blank">
+                                        Относительная ссылка на страницу в текущем каталоге
+                                    </a>
+                                    <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action" target="_blank">
+                                        Относительная ссылка на страницу в каталоге about
+                                    </a>
+                                    <a href="https://kubsu.ru/ru" class="list-group-item list-group-item-action" target="_blank">
+                                        Относительная ссылка на страницу в каталоге уровнем выше
+                                    </a>
+                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" target="_blank">
+                                        Относительная ссылка на страницу в каталоге двумя уровнями выше
+                                    </a>
+                                    
+                                    <div class="list-group-item">
+                                        Это абзац текста с <a href="https://kubsu.ru" class="text-decoration-none">контекстной ссылкой</a> внутри него.
+                                    </div>
+                                    
+                                    <a href="https://example.com/about#team" class="list-group-item list-group-item-action">
+                                        Ссылка на фрагмент страницы стороннего сайта
+                                    </a>
+                                    
+                                    <div class="list-group-item">
+                                        <div class="image-map-container">
+                                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" class="img-fluid rounded" usemap="#image-map">
+                                            <map name="image-map">
+                                                <area shape="rect" coords="24,18,210,56" href="https://kubsu.ru" alt="Прямоугольная область" target="_blank">
+                                                <area shape="circle" coords="230,340,100" href="https://kubsu.ru" alt="Круглая область" target="_blank">
+                                            </map>
+                                        </div>
+                                        <small class="text-muted">Изображение с кликабельными областями</small>
+                                    </div>
+                                    
+                                    <a href="" class="list-group-item list-group-item-action disabled">
+                                        Ссылка с пустым href
+                                    </a>
+                                    
+                                    <span class="list-group-item disabled-link">
+                                        КубГУ официальный сайт (ссылка без href)
+                                    </span>
+                                    
+                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="nofollow">
+                                        Ссылка с запретом перехода для поисковиков (nofollow)
+                                    </a>
+                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="noindex">
+                                        Ссылка, запрещенная для индексации (noindex)
+                                    </a>
+                                    
+                                    <div class="list-group-item">
+                                        <ol class="mb-0 mt-2">
+                                            <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ" class="text-decoration-none">Кубанский государственный университет</a></li>
+                                            <li><a href="https://kubsu.ru/university" title="Информация об университете" class="text-decoration-none">Об университете</a></li>
+                                            <li><a href="https://kubsu.ru/education" title="Образовательные программы" class="text-decoration-none">Образование</a></li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" class="list-group-item list-group-item-action" target="_blank">
+                                        Ссылка на файл на сервере FTP
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -772,3 +871,4 @@
     </script>
 </body>
 </html>
+
