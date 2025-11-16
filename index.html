@@ -21,12 +21,15 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
+            padding-top: 0;
+            margin: 0;
         }
         
         /* Шапка */
         .navbar-custom {
             background-color: var(--primary-color);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 0;
         }
         
         .navbar-brand img {
@@ -36,17 +39,18 @@
         /* Основной контент */
         .main-container {
             background: white;
-            border-radius: 10px;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         
         .section-title {
             color: var(--primary-color);
             border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 0.75rem;
-            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
+            font-size: 1.5rem;
         }
         
         /* Таблица */
@@ -55,11 +59,13 @@
             color: white;
             font-weight: 600;
             border: none;
+            padding: 0.75rem;
         }
         
         .custom-table td {
             border-color: #dee2e6;
             vertical-align: middle;
+            padding: 0.75rem;
         }
         
         .custom-table tr:nth-child(even) {
@@ -68,21 +74,19 @@
         
         .custom-table tr:hover {
             background-color: #e8f4fc;
-            transition: background-color 0.2s ease;
         }
         
         /* Карточки */
         .content-card {
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 0;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .content-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        .content-card:last-child {
+            border-bottom: none;
         }
         
         .calculator-card {
@@ -103,9 +107,9 @@
             font-weight: bold;
             color: var(--success-color);
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem;
             background: linear-gradient(135deg, #f8fff9, #e8f5e8);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 2px solid var(--success-color);
         }
         
@@ -117,62 +121,54 @@
         .btn-primary {
             background-color: var(--secondary-color);
             border-color: var(--secondary-color);
-            padding: 0.75rem 2rem;
+            padding: 0.6rem 1.5rem;
             font-weight: 600;
         }
         
         .btn-primary:hover {
             background-color: #2980b9;
             border-color: #2980b9;
-            transform: translateY(-1px);
         }
         
         /* Галерея */
         .gallery-container {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
             background: #f8f9fa;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
         }
         
         .gallery-slider {
             display: flex;
             transition: transform 0.4s ease-in-out;
-            gap: 1.5rem;
-            padding: 0 1.5rem;
+            gap: 1rem;
+            padding: 0 1rem;
         }
         
         .gallery-item {
-            flex: 0 0 calc(33.333% - 1rem);
+            flex: 0 0 calc(33.333% - 0.67rem);
             min-width: 0;
         }
         
         .gallery-image {
             width: 100%;
-            height: 220px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-image:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .gallery-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
         
         .gallery-btn {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border: none;
             border-radius: 50%;
             background: var(--secondary-color);
@@ -182,31 +178,29 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .gallery-btn:hover:not(:disabled) {
             background: #2980b9;
-            transform: scale(1.1);
         }
         
         .gallery-btn:disabled {
             background: #bdc3c7;
             cursor: not-allowed;
-            transform: none;
         }
         
         .gallery-pager {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.75rem;
-            margin-top: 1rem;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
         
         .pager-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #bdc3c7;
             cursor: pointer;
@@ -215,25 +209,24 @@
         
         .pager-dot.active {
             background: var(--secondary-color);
-            transform: scale(1.3);
+            transform: scale(1.2);
         }
         
         .pager-info {
-            margin: 0 1rem;
-            font-size: 0.9rem;
+            margin: 0 0.5rem;
+            font-size: 0.85rem;
             color: #7f8c8d;
-            font-weight: 500;
         }
         
         /* Списки */
         .list-group-item {
             border: 1px solid #e9ecef;
-            padding: 1rem 1.25rem;
-            transition: background-color 0.2s ease;
+            padding: 0.75rem 1rem;
+            border-radius: 0;
         }
         
-        .list-group-item:hover {
-            background-color: #f8f9fa;
+        .list-group-item:first-child {
+            border-top: 1px solid #e9ecef;
         }
         
         .list-group-item-action {
@@ -243,13 +236,14 @@
         
         .list-group-item-action:hover {
             color: var(--secondary-color);
+            background-color: #f8f9fa;
         }
         
         /* Подвал */
         .footer-custom {
             background-color: var(--primary-color);
             color: white;
-            margin-top: 3rem;
+            margin-top: 0;
         }
         
         /* Адаптивность */
@@ -259,62 +253,53 @@
             }
             
             .gallery-image {
-                height: 250px;
-            }
-            
-            .gallery-controls {
-                gap: 1rem;
+                height: 200px;
             }
             
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             
-            .main-container {
-                border-radius: 0;
-                margin: 0 -1rem;
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
             }
         }
         
         @media (min-width: 768px) and (max-width: 991.98px) {
             .gallery-item {
-                flex: 0 0 calc(50% - 0.75rem);
+                flex: 0 0 calc(50% - 0.5rem);
             }
         }
         
-        /* Утилиты */
-        .text-accent {
-            color: var(--accent-color);
+        /* Компактные отступы */
+        .compact-section {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .bg-light-custom {
-            background-color: #f8f9fa;
+        .compact-section:last-child {
+            border-bottom: none;
         }
-
-        /* Ссылки с изображениями */
-        .img-link {
-            display: block;
-            text-align: center;
-            text-decoration: none;
+        
+        .compact-card {
+            margin-bottom: 0;
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #e9ecef;
         }
-
-        .img-link img {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Карта изображения */
-        .image-map-container {
-            position: relative;
-            display: inline-block;
+        
+        .compact-card:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
 <body>
     <!-- Шапка -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
-                <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="45" height="45" class="me-2">
+                <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="40" height="40" class="me-2">
                 <span class="d-none d-md-inline">КубГУ</span>
             </a>
             
@@ -340,285 +325,220 @@
     </nav>
 
     <!-- Основной контент -->
-    <main class="container my-4">
-        <div class="main-container p-4">
-            
-            <!-- Секция ссылок и таблицы -->
-            <div class="row g-4">
-                <!-- Таблица -->
-                <div class="col-12 col-lg-8">
-                    <section id="table">
-                        <h2 class="section-title">Таблица сотрудников</h2>
-                        <div class="card content-card">
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover custom-table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>ФИО</th>
-                                                <th>Должность</th>
-                                                <th>Отдел</th>
-                                                <th>Стаж</th>
-                                                <th>Зарплата</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Иванов И.И.</td><td>Разработчик</td><td>IT</td><td>5 лет</td><td>150 000 ₽</td></tr>
-                                            <tr><td>Петров П.П.</td><td>Аналитик</td><td>IT</td><td>3 года</td><td>120 000 ₽</td></tr>
-                                            <tr><td>Сидоров С.С.</td><td>Тестировщик</td><td>QA</td><td>2 года</td><td>90 000 ₽</td></tr>
-                                            <tr><td>Кузнецов К.К.</td><td>Дизайнер</td><td rowspan="2">UX/UI</td><td>4 года</td><td>110 000 ₽</td></tr>
-                                            <tr><td>Смирнова А.А.</td><td>Дизайнер</td><td>1 год</td><td>80 000 ₽</td></tr>
-                                            <tr class="table-info"><td colspan="2"><strong>ИТОГО:</strong></td><td colspan="3"><strong>5 сотрудников</strong></td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                
-                <!-- Ссылки -->
-                <div class="col-12 col-lg-4">
-                    <section id="hyperlinks">
-                        <h2 class="section-title">Список гиперссылок</h2>
-                        <div class="card content-card">
-                            <div class="card-body p-0">
-                                <div class="list-group list-group-flush">
-                                    <a href="http://kubsu.ru" class="list-group-item list-group-item-action">
-                                        Абсолютная гиперссылка на главную страницу kubsu.ru
-                                    </a>
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action">
-                                        Абсолютная гиперссылка на главную kubsu.ru (HTTPS)
-                                    </a>
-                                    
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action img-link">
-                                        <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" class="img-fluid rounded" style="max-height: 80px;">
-                                        Ссылка с изображением на главную КубГУ
-                                    </a>
-                                    
-                                    <a href="https://www.clipr.cc/1gVNb" class="list-group-item list-group-item-action">
-                                        Сокращенная ссылка на внутреннюю страницу
-                                    </a>
-                                    <a href="https://www.clipr.cc/v11hP" class="list-group-item list-group-item-action">
-                                        Сокращенная ссылка на главную страницу
-                                    </a>
-                                    
-                                    <a href="#section-name" class="list-group-item list-group-item-action">
-                                        Перейти к разделу (якорная ссылка)
-                                    </a>
-                                    
-                                    <a href="https://www.kubsu.ru/ru/search?key=программирование" class="list-group-item list-group-item-action" target="_blank">
-                                        Ссылка с тремя параметрами в URL
-                                    </a>
-                                    <a href="https://www.kubsu.ru/ru/education/programs?id=1" class="list-group-item list-group-item-action" target="_blank">
-                                        Ссылка с параметром id в URL
-                                    </a>
-                                    
-                                    <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action" target="_blank">
-                                        Относительная ссылка на страницу в текущем каталоге
-                                    </a>
-                                    <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action" target="_blank">
-                                        Относительная ссылка на страницу в каталоге about
-                                    </a>
-                                    <a href="https://kubsu.ru/ru" class="list-group-item list-group-item-action" target="_blank">
-                                        Относительная ссылка на страницу в каталоге уровнем выше
-                                    </a>
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" target="_blank">
-                                        Относительная ссылка на страницу в каталоге двумя уровнями выше
-                                    </a>
-                                    
-                                    <div class="list-group-item">
-                                        Это абзац текста с <a href="https://kubsu.ru" class="text-decoration-none">контекстной ссылкой</a> внутри него.
-                                    </div>
-                                    
-                                    <a href="https://example.com/about#team" class="list-group-item list-group-item-action">
-                                        Ссылка на фрагмент страницы стороннего сайта
-                                    </a>
-                                    
-                                    <div class="list-group-item">
-                                        <div class="image-map-container">
-                                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Пример изображения" class="img-fluid rounded" usemap="#image-map">
-                                            <map name="image-map">
-                                                <area shape="rect" coords="24,18,210,56" href="https://kubsu.ru" alt="Прямоугольная область" target="_blank">
-                                                <area shape="circle" coords="230,340,100" href="https://kubsu.ru" alt="Круглая область" target="_blank">
-                                            </map>
-                                        </div>
-                                        <small class="text-muted">Изображение с кликабельными областями</small>
-                                    </div>
-                                    
-                                    <a href="" class="list-group-item list-group-item-action disabled">
-                                        Ссылка с пустым href
-                                    </a>
-                                    
-                                    <span class="list-group-item disabled-link">
-                                        КубГУ официальный сайт (ссылка без href)
-                                    </span>
-                                    
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="nofollow">
-                                        Ссылка с запретом перехода для поисковиков (nofollow)
-                                    </a>
-                                    <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="noindex">
-                                        Ссылка, запрещенная для индексации (noindex)
-                                    </a>
-                                    
-                                    <div class="list-group-item">
-                                        <ol class="mb-0 mt-2">
-                                            <li><a href="https://kubsu.ru" title="Официальный сайт КубГУ" class="text-decoration-none">Кубанский государственный университет</a></li>
-                                            <li><a href="https://kubsu.ru/university" title="Информация об университете" class="text-decoration-none">Об университете</a></li>
-                                            <li><a href="https://kubsu.ru/education" title="Образовательные программы" class="text-decoration-none">Образование</a></li>
-                                        </ol>
-                                    </div>
-                                    
-                                    <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" class="list-group-item list-group-item-action" target="_blank">
-                                        Ссылка на файл на сервере FTP
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+    <main class="main-container">
+        <!-- Секция таблицы -->
+        <section id="table" class="compact-section">
+            <div class="container-fluid">
+                <h2 class="section-title">Таблица сотрудников</h2>
+                <div class="table-responsive">
+                    <table class="table table-hover custom-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>ФИО</th>
+                                <th>Должность</th>
+                                <th>Отдел</th>
+                                <th>Стаж</th>
+                                <th>Зарплата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Иванов И.И.</td><td>Разработчик</td><td>IT</td><td>5 лет</td><td>150 000 ₽</td></tr>
+                            <tr><td>Петров П.П.</td><td>Аналитик</td><td>IT</td><td>3 года</td><td>120 000 ₽</td></tr>
+                            <tr><td>Сидоров С.С.</td><td>Тестировщик</td><td>QA</td><td>2 года</td><td>90 000 ₽</td></tr>
+                            <tr><td>Кузнецов К.К.</td><td>Дизайнер</td><td rowspan="2">UX/UI</td><td>4 года</td><td>110 000 ₽</td></tr>
+                            <tr><td>Смирнова А.А.</td><td>Дизайнер</td><td>1 год</td><td>80 000 ₽</td></tr>
+                            <tr class="table-info"><td colspan="2"><strong>ИТОГО:</strong></td><td colspan="3"><strong>5 сотрудников</strong></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </section>
 
-            <!-- Галерея -->
-            <section id="gallery" class="mt-5">
-                <h2 class="section-title">Галерея университета</h2>
-                <div class="card content-card gallery-card">
-                    <div class="card-body">
-                        <div class="gallery-container">
-                            <div class="gallery-slider" id="gallerySlider">
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=1" alt="Корпус университета" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=2" alt="Библиотека" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=3" alt="Аудитория" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=4" alt="Лаборатория" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=5" alt="Спортзал" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=6" alt="Студенты" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=7" alt="Конференция" class="gallery-image"></div>
-                                <div class="gallery-item"><img src="https://picsum.photos/400/300?random=8" alt="Выпускники" class="gallery-image"></div>
-                            </div>
+        <!-- Секция ссылок -->
+        <section id="hyperlinks" class="compact-section bg-light">
+            <div class="container-fluid">
+                <h2 class="section-title">Список гиперссылок</h2>
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <div class="list-group">
+                            <a href="http://kubsu.ru" class="list-group-item list-group-item-action">Абсолютная гиперссылка на главную страницу kubsu.ru</a>
+                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action">Абсолютная гиперссылка на главную kubsu.ru (HTTPS)</a>
+                            <a href="https://www.clipr.cc/1gVNb" class="list-group-item list-group-item-action">Сокращенная ссылка на внутреннюю страницу</a>
+                            <a href="https://www.clipr.cc/v11hP" class="list-group-item list-group-item-action">Сокращенная ссылка на главную страницу</a>
+                            <a href="#section-name" class="list-group-item list-group-item-action">Перейти к разделу (якорная ссылка)</a>
+                            <a href="https://www.kubsu.ru/ru/search?key=программирование" class="list-group-item list-group-item-action" target="_blank">Ссылка с тремя параметрами в URL</a>
+                            <a href="https://www.kubsu.ru/ru/education/programs?id=1" class="list-group-item list-group-item-action" target="_blank">Ссылка с параметром id в URL</a>
                         </div>
-                        
-                        <div class="gallery-controls">
-                            <button class="gallery-btn" id="prevBtn" disabled><i class="bi bi-chevron-left"></i></button>
-                            <div class="gallery-pager">
-                                <div class="pager-dot active" data-page="0"></div>
-                                <div class="pager-dot" data-page="1"></div>
-                                <div class="pager-dot" data-page="2"></div>
-                                <div class="pager-dot" data-page="3"></div>
-                                <div class="pager-dot" data-page="4"></div>
-                                <div class="pager-dot" data-page="5"></div>
-                                <div class="pager-dot" data-page="6"></div>
-                                <div class="pager-dot" data-page="7"></div>
-                            </div>
-                            <button class="gallery-btn" id="nextBtn"><i class="bi bi-chevron-right"></i></button>
-                        </div>
-                        
-                        <div class="text-center mt-3">
-                            <span class="pager-info" id="pageInfo">Страница 1 из 3</span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="list-group">
+                            <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в текущем каталоге</a>
+                            <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге about</a>
+                            <a href="https://kubsu.ru/ru" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге уровнем выше</a>
+                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге двумя уровнями выше</a>
+                            <a href="https://example.com/about#team" class="list-group-item list-group-item-action">Ссылка на фрагмент страницы стороннего сайта</a>
+                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="nofollow">Ссылка с запретом перехода для поисковиков (nofollow)</a>
+                            <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" class="list-group-item list-group-item-action" target="_blank">Ссылка на файл на сервере FTP</a>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Калькуляторы -->
-            <div class="row g-4 mt-3">
-                <!-- Калькулятор товаров -->
-                <div class="col-12 col-lg-6">
-                    <section id="calculator">
-                        <h2 class="section-title">Калькулятор товаров</h2>
-                        <div class="card content-card calculator-card">
-                            <div class="card-body">
-                                <form id="calculatorForm">
-                                    <div class="mb-3">
-                                        <label for="productQuantity" class="form-label fw-semibold">Количество товара:</label>
-                                        <input type="number" class="form-control" id="productQuantity" min="1" value="1" required>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="productSelect" class="form-label fw-semibold">Выберите товар:</label>
-                                        <select class="form-select" id="productSelect" required>
-                                            <option value="" disabled selected>-- Выберите товар --</option>
-                                            <option value="2500">Ноутбук - 2 500 ₽</option>
-                                            <option value="1500">Смартфон - 1 500 ₽</option>
-                                            <option value="800">Наушники - 800 ₽</option>
-                                            <option value="300">Мышь - 300 ₽</option>
-                                            <option value="1200">Клавиатура - 1 200 ₽</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <button type="button" class="btn btn-primary w-100" id="calculateBtn">Рассчитать стоимость</button>
-                                    
-                                    <div class="alert alert-success mt-3 mb-0" id="resultAlert" role="alert" style="display: none;">
-                                        <h6 class="alert-heading mb-2">Результат расчета</h6>
-                                        <p class="mb-0" id="resultText"></p>
-                                    </div>
-                                </form>
-                            </div>
+                <div class="mt-3">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            Это абзац текста с <a href="https://kubsu.ru" class="text-decoration-none">контекстной ссылкой</a> внутри него.
                         </div>
-                    </section>
+                        <div class="list-group-item text-center">
+                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" class="img-fluid rounded" style="max-height: 100px;">
+                            <div class="mt-2">Ссылка с изображением на главную КубГУ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery" class="compact-section">
+            <div class="container-fluid">
+                <h2 class="section-title">Галерея университета</h2>
+                <div class="gallery-container">
+                    <div class="gallery-slider" id="gallerySlider">
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Главный корпус университета" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Университетская библиотека" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://cdn.culture.ru/images/b3270455-405f-5c63-a992-5fcbd9faac3e" alt="Студенты в аудитории" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Научная лаборатория" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Спортивный зал" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Студенческое общежитие" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Конференция в университете" class="gallery-image"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1541336032412-2048a678540d?ixlib=rb-4.0.3&w=400&h=300&fit=crop" alt="Выпускной ceremony" class="gallery-image"></div>
+                    </div>
                 </div>
                 
-                <!-- Калькулятор услуг -->
-                <div class="col-12 col-lg-6">
-                    <section id="service-calculator">
-                        <h2 class="section-title">Калькулятор услуг</h2>
-                        <div class="card content-card service-calculator-card">
-                            <div class="card-body">
-                                <form id="serviceCalculatorForm">
-                                    <div class="mb-3">
-                                        <label for="serviceQuantity" class="form-label fw-semibold">Количество часов:</label>
-                                        <input type="number" class="form-control" id="serviceQuantity" min="1" max="100" value="1" required>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Тип услуги:</label>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="radio" name="serviceType" id="type1" value="consulting" checked>
-                                            <label class="form-check-label" for="type1">Консультация - 1 000 ₽/час</label>
+                <div class="gallery-controls">
+                    <button class="gallery-btn" id="prevBtn" disabled><i class="bi bi-chevron-left"></i></button>
+                    <div class="gallery-pager">
+                        <div class="pager-dot active" data-page="0"></div>
+                        <div class="pager-dot" data-page="1"></div>
+                        <div class="pager-dot" data-page="2"></div>
+                        <div class="pager-dot" data-page="3"></div>
+                        <div class="pager-dot" data-page="4"></div>
+                        <div class="pager-dot" data-page="5"></div>
+                        <div class="pager-dot" data-page="6"></div>
+                        <div class="pager-dot" data-page="7"></div>
+                    </div>
+                    <button class="gallery-btn" id="nextBtn"><i class="bi bi-chevron-right"></i></button>
+                </div>
+                
+                <div class="text-center mt-2">
+                    <span class="pager-info" id="pageInfo">Страница 1 из 3</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Калькуляторы -->
+        <section class="compact-section bg-light">
+            <div class="container-fluid">
+                <div class="row g-3">
+                    <!-- Калькулятор товаров -->
+                    <div class="col-lg-6">
+                        <section id="calculator">
+                            <h2 class="section-title">Калькулятор товаров</h2>
+                            <div class="card compact-card calculator-card">
+                                <div class="card-body">
+                                    <form id="calculatorForm">
+                                        <div class="mb-3">
+                                            <label for="productQuantity" class="form-label fw-semibold">Количество товара:</label>
+                                            <input type="number" class="form-control" id="productQuantity" min="1" value="1" required>
                                         </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="radio" name="serviceType" id="type2" value="development">
-                                            <label class="form-check-label" for="type2">Разработка - 2 000 ₽/час</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="serviceType" id="type3" value="support">
-                                            <label class="form-check-label" for="type3">Техподдержка - 1 500 ₽/час</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div id="dynamicFields">
-                                        <div class="mb-3 dynamic-field" id="developmentOptions">
-                                            <label for="developmentOption" class="form-label fw-semibold">Опция разработки:</label>
-                                            <select class="form-select" id="developmentOption">
-                                                <option value="1">Стандартная (+0%)</option>
-                                                <option value="1.2">Срочная (+20%)</option>
-                                                <option value="1.5">Экспресс (+50%)</option>
-                                                <option value="0.8">Долгосрочная (-20%)</option>
+                                        
+                                        <div class="mb-3">
+                                            <label for="productSelect" class="form-label fw-semibold">Выберите товар:</label>
+                                            <select class="form-select" id="productSelect" required>
+                                                <option value="" disabled selected>-- Выберите товар --</option>
+                                                <option value="2500">Ноутбук - 2 500 ₽</option>
+                                                <option value="1500">Смартфон - 1 500 ₽</option>
+                                                <option value="800">Наушники - 800 ₽</option>
+                                                <option value="300">Мышь - 300 ₽</option>
+                                                <option value="1200">Клавиатура - 1 200 ₽</option>
                                             </select>
                                         </div>
                                         
-                                        <div class="mb-3 dynamic-field" id="supportProperty">
+                                        <button type="button" class="btn btn-primary w-100" id="calculateBtn">Рассчитать стоимость</button>
+                                        
+                                        <div class="alert alert-success mt-3 mb-0" id="resultAlert" role="alert" style="display: none;">
+                                            <h6 class="alert-heading mb-2">Результат расчета</h6>
+                                            <p class="mb-0" id="resultText"></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <!-- Калькулятор услуг -->
+                    <div class="col-lg-6">
+                        <section id="service-calculator">
+                            <h2 class="section-title">Калькулятор услуг</h2>
+                            <div class="card compact-card service-calculator-card">
+                                <div class="card-body">
+                                    <form id="serviceCalculatorForm">
+                                        <div class="mb-3">
+                                            <label for="serviceQuantity" class="form-label fw-semibold">Количество часов:</label>
+                                            <input type="number" class="form-control" id="serviceQuantity" min="1" max="100" value="1" required>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Тип услуги:</label>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="serviceType" id="type1" value="consulting" checked>
+                                                <label class="form-check-label" for="type1">Консультация - 1 000 ₽/час</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="serviceType" id="type2" value="development">
+                                                <label class="form-check-label" for="type2">Разработка - 2 000 ₽/час</label>
+                                            </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="extendedWarranty">
-                                                <label class="form-check-label" for="extendedWarranty">Расширенная гарантия (+25%)</label>
+                                                <input class="form-check-input" type="radio" name="serviceType" id="type3" value="support">
+                                                <label class="form-check-label" for="type3">Техподдержка - 1 500 ₽/час</label>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="price-display mt-4">
-                                        <div class="small text-muted">Итоговая стоимость:</div>
-                                        <div id="totalPrice">1 000 ₽</div>
-                                    </div>
-                                </form>
+                                        
+                                        <div id="dynamicFields">
+                                            <div class="mb-3 dynamic-field" id="developmentOptions">
+                                                <label for="developmentOption" class="form-label fw-semibold">Опция разработки:</label>
+                                                <select class="form-select" id="developmentOption">
+                                                    <option value="1">Стандартная (+0%)</option>
+                                                    <option value="1.2">Срочная (+20%)</option>
+                                                    <option value="1.5">Экспресс (+50%)</option>
+                                                    <option value="0.8">Долгосрочная (-20%)</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="mb-3 dynamic-field" id="supportProperty">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="extendedWarranty">
+                                                    <label class="form-check-label" for="extendedWarranty">Расширенная гарантия (+25%)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="price-display mt-3">
+                                            <div class="small text-muted">Итоговая стоимость:</div>
+                                            <div id="totalPrice">1 000 ₽</div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Форма анкеты -->
-            <section id="form" class="mt-5">
+        <!-- Форма анкеты -->
+        <section id="form" class="compact-section">
+            <div class="container-fluid">
                 <h2 class="section-title">Анкета разработчика</h2>
-                <div class="card content-card">
+                <div class="card compact-card">
                     <div class="card-body">
                         <form action="/" method="POST">
                             <div class="row g-3">
@@ -665,7 +585,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="bio" class="form-label fw-semibold">Биография:</label>
-                                    <textarea class="form-control" id="bio" name="bio" rows="4" placeholder="Расскажите о себе..."></textarea>
+                                    <textarea class="form-control" id="bio" name="bio" rows="3" placeholder="Расскажите о себе..."></textarea>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
@@ -680,13 +600,13 @@
                         </form>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
     <!-- Подвал -->
-    <footer class="footer-custom py-4 mt-5">
-        <div class="container">
+    <footer class="footer-custom py-3">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12 text-center">
                     <p class="mb-0">&copy; 2023 Кубанский государственный университет. Все права защищены.</p>
@@ -871,4 +791,3 @@
     </script>
 </body>
 </html>
-
