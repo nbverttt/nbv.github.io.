@@ -3,789 +3,622 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кубанский государственный университет</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <title>Форма обратной связи</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding-top: 0;
-            margin: 0;
-        }
-        
-        /* Шапка */
-        .navbar-custom {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 0;
-        }
-        
-        .navbar-brand img {
-            border-radius: 4px;
-        }
-        
-        /* Основной контент */
-        .main-container {
-            background: white;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        
-        .section-title {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            font-size: 1.5rem;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
-        
-        /* Таблица */
-        .custom-table th {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: 600;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .open-form-btn {
+            padding: 15px 30px;
+            background-color: #fff;
+            color: #667eea;
             border: none;
-            padding: 0.75rem;
-        }
-        
-        .custom-table td {
-            border-color: #dee2e6;
-            vertical-align: middle;
-            padding: 0.75rem;
-        }
-        
-        .custom-table tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        .custom-table tr:hover {
-            background-color: #e8f4fc;
-        }
-        
-        /* Карточки */
-        .content-card {
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-            margin-bottom: 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .content-card:last-child {
-            border-bottom: none;
-        }
-        
-        .calculator-card {
-            border-left: 4px solid var(--secondary-color);
-        }
-        
-        .service-calculator-card {
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .gallery-card {
-            border-left: 4px solid #9b59b6;
-        }
-        
-        /* Калькуляторы */
-        .price-display {
-            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
             font-weight: bold;
-            color: var(--success-color);
-            text-align: center;
-            padding: 1rem;
-            background: linear-gradient(135deg, #f8fff9, #e8f5e8);
-            border-radius: 8px;
-            border: 2px solid var(--success-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+
+        .open-form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
-        
-        .btn-primary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            padding: 0.6rem 1.5rem;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
-        }
-        
-        /* Галерея */
-        .gallery-container {
-            position: relative;
-            overflow: hidden;
-            background: #f8f9fa;
-            padding: 1rem 0;
-        }
-        
-        .gallery-slider {
-            display: flex;
-            transition: transform 0.4s ease-in-out;
-            gap: 1rem;
-            padding: 0 1rem;
-        }
-        
-        .gallery-item {
-            flex: 0 0 calc(33.333% - 0.67rem);
-            min-width: 0;
-        }
-        
-        .gallery-image {
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .gallery-controls {
-            display: flex;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            z-index: 1000;
+            padding: 20px;
         }
-        
-        .gallery-btn {
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        .feedback-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active .feedback-form {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-title {
+            font-size: 28px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
             width: 40px;
             height: 40px;
-            border: none;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-        
-        .gallery-btn:hover:not(:disabled) {
-            background: #2980b9;
-        }
-        
-        .gallery-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-        }
-        
-        .gallery-pager {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        
-        .pager-dot {
-            width: 8px;
-            height: 8px;
             border-radius: 50%;
-            background: #bdc3c7;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
-        
-        .pager-dot.active {
-            background: var(--secondary-color);
-            transform: scale(1.2);
-        }
-        
-        .pager-info {
-            margin: 0 0.5rem;
-            font-size: 0.85rem;
-            color: #7f8c8d;
-        }
-        
-        /* Списки */
-        .list-group-item {
-            border: 1px solid #e9ecef;
-            padding: 0.75rem 1rem;
-            border-radius: 0;
-        }
-        
-        .list-group-item:first-child {
-            border-top: 1px solid #e9ecef;
-        }
-        
-        .list-group-item-action {
-            color: #495057;
-            text-decoration: none;
-        }
-        
-        .list-group-item-action:hover {
-            color: var(--secondary-color);
+
+        .close-btn:hover {
+            color: #ff4757;
             background-color: #f8f9fa;
         }
-        
-        /* Подвал */
-        .footer-custom {
-            background-color: var(--primary-color);
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .required::after {
+            content: " *";
+            color: #ff4757;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .privacy-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-top: 0;
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 767.98px) {
-            .gallery-item {
-                flex: 0 0 calc(100% - 1rem);
-            }
-            
-            .gallery-image {
-                height: 200px;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-            }
-            
-            .container {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-            }
-        }
-        
-        @media (min-width: 768px) and (max-width: 991.98px) {
-            .gallery-item {
-                flex: 0 0 calc(50% - 0.5rem);
-            }
-        }
-        
-        /* Компактные отступы */
-        .compact-section {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .compact-section:last-child {
-            border-bottom: none;
-        }
-        
-        .compact-card {
-            margin-bottom: 0;
-            border-radius: 0;
             border: none;
-            border-bottom: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
-        
-        .compact-card:last-child {
-            border-bottom: none;
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .message {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .popup-overlay {
+                padding: 10px;
+            }
+            
+            .feedback-form {
+                padding: 25px;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+            
+            .form-title {
+                font-size: 24px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            textarea {
+                padding: 12px;
+                font-size: 16px; /* Важно для iOS */
+            }
+            
+            .submit-btn {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feedback-form {
+                padding: 20px;
+            }
+            
+            .form-title {
+                font-size: 22px;
+            }
+            
+            .form-header {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Предотвращение масштабирования на iOS */
+        @media screen and (max-width: 768px) {
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            textarea {
+                font-size: 16px !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
-                <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" width="40" height="40" class="me-2">
-                <span class="d-none d-md-inline">КубГУ</span>
-            </a>
-            
-            <div class="navbar-brand mx-auto text-center">
-                <h1 class="h5 mb-0">Кубанский государственный университет</h1>
-            </div>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#hyperlinks">Ссылки</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#table">Таблица</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#form">Анкета</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#calculator">Товары</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#service-calculator">Услуги</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Галерея</a></li>
-                </ul>
-            </div>
+    <div class="container">
+        <h1 style="text-align: center; color: white; margin-bottom: 30px;">Демонстрация формы обратной связи</h1>
+        <div style="text-align: center;">
+            <button class="open-form-btn">📧 Открыть форму обратной связи</button>
         </div>
-    </nav>
+    </div>
 
-    <!-- Основной контент -->
-    <main class="main-container">
-        <!-- Секция таблицы -->
-        <section id="table" class="compact-section">
-            <div class="container-fluid">
-                <h2 class="section-title">Таблица сотрудников</h2>
-                <div class="table-responsive">
-                    <table class="table table-hover custom-table mb-0">
-                        <thead>
-                            <tr>
-                                <th>ФИО</th>
-                                <th>Должность</th>
-                                <th>Отдел</th>
-                                <th>Стаж</th>
-                                <th>Зарплата</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Иванов И.И.</td><td>Разработчик</td><td>IT</td><td>5 лет</td><td>150 000 ₽</td></tr>
-                            <tr><td>Петров П.П.</td><td>Аналитик</td><td>IT</td><td>3 года</td><td>120 000 ₽</td></tr>
-                            <tr><td>Сидоров С.С.</td><td>Тестировщик</td><td>QA</td><td>2 года</td><td>90 000 ₽</td></tr>
-                            <tr><td>Кузнецов К.К.</td><td>Дизайнер</td><td rowspan="2">UX/UI</td><td>4 года</td><td>110 000 ₽</td></tr>
-                            <tr><td>Смирнова А.А.</td><td>Дизайнер</td><td>1 год</td><td>80 000 ₽</td></tr>
-                            <tr class="table-info"><td colspan="2"><strong>ИТОГО:</strong></td><td colspan="3"><strong>5 сотрудников</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="feedback-form">
+            <div class="form-header">
+                <h2 class="form-title">Обратная связь</h2>
+                <button class="close-btn" id="closeBtn">&times;</button>
             </div>
-        </section>
-
-        <!-- Секция ссылок -->
-        <section id="hyperlinks" class="compact-section bg-light">
-            <div class="container-fluid">
-                <h2 class="section-title">Список гиперссылок</h2>
-                <div class="row g-2">
-                    <div class="col-md-6">
-                        <div class="list-group">
-                            <a href="http://kubsu.ru" class="list-group-item list-group-item-action">Абсолютная гиперссылка на главную страницу kubsu.ru</a>
-                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action">Абсолютная гиперссылка на главную kubsu.ru (HTTPS)</a>
-                            <a href="https://www.clipr.cc/1gVNb" class="list-group-item list-group-item-action">Сокращенная ссылка на внутреннюю страницу</a>
-                            <a href="https://www.clipr.cc/v11hP" class="list-group-item list-group-item-action">Сокращенная ссылка на главную страницу</a>
-                            <a href="#section-name" class="list-group-item list-group-item-action">Перейти к разделу (якорная ссылка)</a>
-                            <a href="https://www.kubsu.ru/ru/search?key=программирование" class="list-group-item list-group-item-action" target="_blank">Ссылка с тремя параметрами в URL</a>
-                            <a href="https://www.kubsu.ru/ru/education/programs?id=1" class="list-group-item list-group-item-action" target="_blank">Ссылка с параметром id в URL</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="list-group">
-                            <a href="https://kubsu.ru/ru/news" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в текущем каталоге</a>
-                            <a href="https://kubsu.ru/ru/about" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге about</a>
-                            <a href="https://kubsu.ru/ru" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге уровнем выше</a>
-                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action" target="_blank">Относительная ссылка на страницу в каталоге двумя уровнями выше</a>
-                            <a href="https://example.com/about#team" class="list-group-item list-group-item-action">Ссылка на фрагмент страницы стороннего сайта</a>
-                            <a href="https://kubsu.ru" class="list-group-item list-group-item-action" rel="nofollow">Ссылка с запретом перехода для поисковиков (nofollow)</a>
-                            <a href="ftp://ftp.freebsd.org/pub/FreeBSD/README.TXT" class="list-group-item list-group-item-action" target="_blank">Ссылка на файл на сервере FTP</a>
-                        </div>
-                    </div>
+            
+            <div class="message" id="message"></div>
+            
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="fullName" class="required">ФИО</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Введите ваше полное имя">
                 </div>
-                <div class="mt-3">
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            Это абзац текста с <a href="https://kubsu.ru" class="text-decoration-none">контекстной ссылкой</a> внутри него.
-                        </div>
-                        <div class="list-group-item text-center">
-                            <img src="https://rvuz.ru/images/kubgu.jpeg" alt="Логотип КубГУ" class="img-fluid rounded" style="max-height: 100px;">
-                            <div class="mt-2">Ссылка с изображением на главную КубГУ</div>
-                        </div>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="email" class="required">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="example@mail.com">
                 </div>
-            </div>
-        </section>
-
-        <!-- Галерея -->
-        <section id="gallery" class="compact-section">
-            <div class="container-fluid">
-                <h2 class="section-title">Галерея университета</h2>
-                <div class="gallery-container">
-                    <div class="gallery-slider" id="gallerySlider">
-                        <div class="gallery-item"><img src="https://историческийбагаж.рф/static/part/4231-8919.jpg" alt="Главный корпус университета" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://avatars.mds.yandex.net/get-altay/9368060/2a00000189037318afa8fc45e152bd6f4246/XXXL" alt="Университетская библиотека" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://cdn.culture.ru/images/b3270455-405f-5c63-a992-5fcbd9faac3e" alt="Студенты в аудитории" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://cdn1.ozone.ru/s3/multimedia-1-1/7133656537.jpg" alt="Научная лаборатория" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://avatars.mds.yandex.net/get-altay/224414/2a0000018689e8fdbcc299ca4f520f78f3db/orig" alt="Спортивный зал" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://avatars.mds.yandex.net/get-altay/998237/2a0000018709161a8ea10ef181f895286415/XXL_height" alt="Студенческое общежитие" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://kirov-portal.ru/upload/original/news/a52/a52d89ab648c1439d7408abdd4229105.jpg" alt="Конференция в университете" class="gallery-image"></div>
-                        <div class="gallery-item"><img src="https://polkrug.ru/assets/media/03/034f0095ecde25ac531b71c0004451233609712.jpg" alt="Выпускной" class="gallery-image"></div>
+                
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99">
+                </div>
+                
+                <div class="form-group">
+                    <label for="organization">Организация</label>
+                    <input type="text" id="organization" name="organization" placeholder="Название вашей организации">
+                </div>
+                
+                <div class="form-group">
+                    <label for="messageText" class="required">Сообщение</label>
+                    <textarea id="messageText" name="message" required placeholder="Опишите ваш вопрос или предложение..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                        <label for="privacyPolicy">
+                            Я согласен с <a href="#" class="privacy-link" onclick="showPrivacyPolicy()">политикой обработки персональных данных</a>
+                            <span class="required"></span>
+                        </label>
                     </div>
                 </div>
                 
-                <div class="gallery-controls">
-                    <button class="gallery-btn" id="prevBtn" disabled><i class="bi bi-chevron-left"></i></button>
-                    <div class="gallery-pager">
-                        <div class="pager-dot active" data-page="0"></div>
-                        <div class="pager-dot" data-page="1"></div>
-                        <div class="pager-dot" data-page="2"></div>
-                        <div class="pager-dot" data-page="3"></div>
-                        <div class="pager-dot" data-page="4"></div>
-                        <div class="pager-dot" data-page="5"></div>
-                        <div class="pager-dot" data-page="6"></div>
-                        <div class="pager-dot" data-page="7"></div>
-                    </div>
-                    <button class="gallery-btn" id="nextBtn"><i class="bi bi-chevron-right"></i></button>
-                </div>
-                
-                <div class="text-center mt-2">
-                    <span class="pager-info" id="pageInfo">Страница 1 из 3</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Калькуляторы -->
-        <section class="compact-section bg-light">
-            <div class="container-fluid">
-                <div class="row g-3">
-                    <!-- Калькулятор товаров -->
-                    <div class="col-lg-6">
-                        <section id="calculator">
-                            <h2 class="section-title">Калькулятор товаров</h2>
-                            <div class="card compact-card calculator-card">
-                                <div class="card-body">
-                                    <form id="calculatorForm">
-                                        <div class="mb-3">
-                                            <label for="productQuantity" class="form-label fw-semibold">Количество товара:</label>
-                                            <input type="number" class="form-control" id="productQuantity" min="1" value="1" required>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="productSelect" class="form-label fw-semibold">Выберите товар:</label>
-                                            <select class="form-select" id="productSelect" required>
-                                                <option value="" disabled selected>-- Выберите товар --</option>
-                                                <option value="2500">Ноутбук - 2 500 ₽</option>
-                                                <option value="1500">Смартфон - 1 500 ₽</option>
-                                                <option value="800">Наушники - 800 ₽</option>
-                                                <option value="300">Мышь - 300 ₽</option>
-                                                <option value="1200">Клавиатура - 1 200 ₽</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <button type="button" class="btn btn-primary w-100" id="calculateBtn">Рассчитать стоимость</button>
-                                        
-                                        <div class="alert alert-success mt-3 mb-0" id="resultAlert" role="alert" style="display: none;">
-                                            <h6 class="alert-heading mb-2">Результат расчета</h6>
-                                            <p class="mb-0" id="resultText"></p>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    
-                    <!-- Калькулятор услуг -->
-                    <div class="col-lg-6">
-                        <section id="service-calculator">
-                            <h2 class="section-title">Калькулятор услуг</h2>
-                            <div class="card compact-card service-calculator-card">
-                                <div class="card-body">
-                                    <form id="serviceCalculatorForm">
-                                        <div class="mb-3">
-                                            <label for="serviceQuantity" class="form-label fw-semibold">Количество часов:</label>
-                                            <input type="number" class="form-control" id="serviceQuantity" min="1" max="100" value="1" required>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">Тип услуги:</label>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="serviceType" id="type1" value="consulting" checked>
-                                                <label class="form-check-label" for="type1">Консультация - 1 000 ₽/час</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="radio" name="serviceType" id="type2" value="development">
-                                                <label class="form-check-label" for="type2">Разработка - 2 000 ₽/час</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="serviceType" id="type3" value="support">
-                                                <label class="form-check-label" for="type3">Техподдержка - 1 500 ₽/час</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <div id="dynamicFields">
-                                            <div class="mb-3 dynamic-field" id="developmentOptions">
-                                                <label for="developmentOption" class="form-label fw-semibold">Опция разработки:</label>
-                                                <select class="form-select" id="developmentOption">
-                                                    <option value="1">Стандартная (+0%)</option>
-                                                    <option value="1.2">Срочная (+20%)</option>
-                                                    <option value="1.5">Экспресс (+50%)</option>
-                                                    <option value="0.8">Долгосрочная (-20%)</option>
-                                                </select>
-                                            </div>
-                                            
-                                            <div class="mb-3 dynamic-field" id="supportProperty">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="extendedWarranty">
-                                                    <label class="form-check-label" for="extendedWarranty">Расширенная гарантия (+25%)</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="price-display mt-3">
-                                            <div class="small text-muted">Итоговая стоимость:</div>
-                                            <div id="totalPrice">1 000 ₽</div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Форма анкеты -->
-        <section id="form" class="compact-section">
-            <div class="container-fluid">
-                <h2 class="section-title">Анкета разработчика</h2>
-                <div class="card compact-card">
-                    <div class="card-body">
-                        <form action="/" method="POST">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="fio" class="form-label fw-semibold">ФИО:</label>
-                                    <input type="text" class="form-control" id="fio" name="fio" placeholder="Введите ваше ФИО" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label fw-semibold">Телефон:</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7-XXX-XXX-XX-XX" pattern="\+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label fw-semibold">E-mail:</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.ru" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="birthdate" class="form-label fw-semibold">Дата рождения:</label>
-                                    <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Пол:</label>
-                                    <div class="d-flex gap-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
-                                            <label class="form-check-label" for="male">Мужской</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
-                                            <label class="form-check-label" for="female">Женский</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label for="languages" class="form-label fw-semibold">Любимый язык программирования:</label>
-                                    <select class="form-select" id="languages" name="languages[]" multiple size="4">
-                                        <option value="pascal">Pascal</option>
-                                        <option value="c">C</option>
-                                        <option value="cpp">C++</option>
-                                        <option value="javascript">JavaScript</option>
-                                        <option value="php">PHP</option>
-                                        <option value="python">Python</option>
-                                        <option value="java">Java</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="bio" class="form-label fw-semibold">Биография:</label>
-                                    <textarea class="form-control" id="bio" name="bio" rows="3" placeholder="Расскажите о себе..."></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="agreement" name="agreement" required>
-                                        <label class="form-check-label" for="agreement">С контрактом ознакомлен(а)</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-4">Сохранить анкету</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Подвал -->
-    <footer class="footer-custom py-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2023 Кубанский государственный университет. Все права защищены.</p>
-                </div>
-            </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="btnText">Отправить сообщение</span>
+                </button>
+            </form>
         </div>
-    </footer>
+    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Калькулятор товаров
-            const calculateBtn = document.getElementById('calculateBtn');
-            const quantityInput = document.getElementById('productQuantity');
-            const productSelect = document.getElementById('productSelect');
-            const resultAlert = document.getElementById('resultAlert');
-            const resultText = document.getElementById('resultText');
-            
-            calculateBtn.addEventListener('click', function() {
-                const quantity = parseInt(quantityInput.value);
-                const selectedOption = productSelect.options[productSelect.selectedIndex];
-                const price = parseFloat(selectedOption.value);
-                const productName = selectedOption.text.split(' - ')[0];
+      
+        const FORMCARRY_FORM_ID = https://formcarry.com/s/h8jHm9R4zLR
+
+        class FeedbackForm {
+            constructor() {
+                this.overlay = document.getElementById('popupOverlay');
+                this.form = document.getElementById('feedbackForm');
+                this.closeBtn = document.getElementById('closeBtn');
+                this.openBtn = document.querySelector('.open-form-btn');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.btnText = document.getElementById('btnText');
+                this.messageEl = document.getElementById('message');
                 
-                if (isNaN(quantity) || quantity < 1) {
-                    showResult('error', 'Введите корректное количество товара');
+                this.storageKey = 'feedbackFormData';
+                this.isSubmitting = false;
+                
+                this.init();
+            }
+            
+            init() {
+                // Обработчики событий
+                this.openBtn.addEventListener('click', () => this.openForm());
+                this.closeBtn.addEventListener('click', () => this.closeForm());
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) this.closeForm();
+                });
+                
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.form.addEventListener('input', () => this.saveFormData());
+                
+                // Обработчик нажатия кнопки "Назад"
+                window.addEventListener('popstate', (e) => {
+                    if (this.overlay.classList.contains('active')) {
+                        this.closeForm();
+                    }
+                });
+                
+                // Восстановление данных из localStorage
+                this.restoreFormData();
+                
+                console.log('Форма инициализирована. Formcarry ID:', FORMCARRY_FORM_ID);
+            }
+            
+            openForm() {
+                this.overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+                // Изменение URL с помощью History API
+                history.pushState({ formOpen: true }, '', '#feedback');
+                this.hideMessage();
+            }
+            
+            closeForm() {
+                this.overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Восстанавливаем прокрутку
+                // Возврат к исходному URL
+                if (history.state && history.state.formOpen) {
+                    history.back();
+                }
+            }
+            
+            saveFormData() {
+                if (this.isSubmitting) return;
+                
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    organization: document.getElementById('organization').value,
+                    message: document.getElementById('messageText').value,
+                    privacyPolicy: document.getElementById('privacyPolicy').checked
+                };
+                
+                localStorage.setItem(this.storageKey, JSON.stringify(formData));
+            }
+            
+            restoreFormData() {
+                const savedData = localStorage.getItem(this.storageKey);
+                if (savedData) {
+                    try {
+                        const formData = JSON.parse(savedData);
+                        
+                        document.getElementById('fullName').value = formData.fullName || '';
+                        document.getElementById('email').value = formData.email || '';
+                        document.getElementById('phone').value = formData.phone || '';
+                        document.getElementById('organization').value = formData.organization || '';
+                        document.getElementById('messageText').value = formData.message || '';
+                        document.getElementById('privacyPolicy').checked = formData.privacyPolicy || false;
+                    } catch (e) {
+                        console.error('Ошибка восстановления данных:', e);
+                    }
+                }
+            }
+            
+            clearFormData() {
+                localStorage.removeItem(this.storageKey);
+                this.form.reset();
+            }
+            
+            showMessage(text, type) {
+                this.messageEl.textContent = text;
+                this.messageEl.className = `message ${type}`;
+                this.messageEl.style.display = 'block';
+                
+                // Автоматическое скрытие сообщений об ошибке через 5 секунд
+                if (type === 'error') {
+                    setTimeout(() => {
+                        this.hideMessage();
+                    }, 5000);
+                }
+            }
+            
+            hideMessage() {
+                this.messageEl.style.display = 'none';
+            }
+            
+            setLoadingState(loading) {
+                this.isSubmitting = loading;
+                this.submitBtn.disabled = loading;
+                
+                if (loading) {
+                    this.btnText.innerHTML = '<div class="loading"></div>Отправка...';
+                } else {
+                    this.btnText.textContent = 'Отправить сообщение';
+                }
+            }
+            
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                // Валидация формы
+                if (!this.validateForm()) {
+                    this.showMessage('Пожалуйста, заполните все обязательные поля правильно', 'error');
                     return;
                 }
                 
-                if (!price) {
-                    showResult('error', 'Выберите товар из списка');
-                    return;
+                this.setLoadingState(true);
+                this.hideMessage();
+                
+                try {
+                    const formData = new FormData(this.form);
+                    const data = Object.fromEntries(formData);
+                    
+                    // Добавляем дополнительную информацию
+                    const submissionData = {
+                        ...data,
+                        _subject: `Новое сообщение от ${data.fullName}`,
+                        _replyto: data.email,
+                        _from: 'Feedback Form',
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    console.log('Отправка данных в Formcarry:', submissionData);
+                    
+                    const response = await fetch(`https://formcarry.com/s/${FORMCARRY_FORM_ID}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(submissionData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.code === 200) {
+                        this.showMessage(' Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
+                        this.clearFormData();
+                        setTimeout(() => {
+                            this.closeForm();
+                        }, 3000);
+                    } else {
+                        throw new Error(result.message || 'Ошибка отправки формы');
+                    }
+                    
+                } catch (error) {
+                    console.error('Ошибка отправки:', error);
+                    this.showMessage(' Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь с нами другим способом.', 'error');
+                } finally {
+                    this.setLoadingState(false);
                 }
-                
-                const totalCost = quantity * price;
-                const resultMessage = `
-                    <strong>Товар:</strong> ${productName}<br>
-                    <strong>Количество:</strong> ${quantity} шт.<br>
-                    <strong>Общая стоимость:</strong> ${formatCurrency(totalCost)}
-                `;
-                
-                showResult('success', resultMessage);
-            });
-            
-            function showResult(type, message) {
-                resultText.innerHTML = message;
-                resultAlert.className = `alert alert-${type === 'success' ? 'success' : 'danger'} mt-3 mb-0`;
-                resultAlert.style.display = 'block';
             }
             
-            // Калькулятор услуг
-            const serviceQuantity = document.getElementById('serviceQuantity');
-            const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
-            const developmentOptions = document.getElementById('developmentOptions');
-            const supportProperty = document.getElementById('supportProperty');
-            const developmentOption = document.getElementById('developmentOption');
-            const extendedWarranty = document.getElementById('extendedWarranty');
-            const totalPrice = document.getElementById('totalPrice');
-            
-            const basePrices = { consulting: 1000, development: 2000, support: 1500 };
-            
-            function updateDynamicFields() {
-                const selectedService = document.querySelector('input[name="serviceType"]:checked').value;
-                developmentOptions.style.display = selectedService === 'development' ? 'block' : 'none';
-                supportProperty.style.display = selectedService === 'support' ? 'block' : 'none';
-            }
-            
-            function calculateServicePrice() {
-                const quantity = parseInt(serviceQuantity.value) || 1;
-                const selectedService = document.querySelector('input[name="serviceType"]:checked').value;
-                let basePrice = basePrices[selectedService];
-                let multiplier = 1;
+            validateForm() {
+                const requiredFields = this.form.querySelectorAll('[required]');
+                let isValid = true;
                 
-                let total = basePrice * quantity;
-                
-                if (selectedService === 'development') {
-                    multiplier = parseFloat(developmentOption.value);
-                    total *= multiplier;
-                } else if (selectedService === 'support' && extendedWarranty.checked) {
-                    multiplier = 1.25;
-                    total *= multiplier;
-                }
-                
-                totalPrice.textContent = formatCurrency(total);
-            }
-            
-            serviceRadios.forEach(radio => radio.addEventListener('change', function() {
-                updateDynamicFields();
-                calculateServicePrice();
-            }));
-            
-            serviceQuantity.addEventListener('input', function() {
-                if (this.value < 1) this.value = 1;
-                if (this.value > 100) this.value = 100;
-                calculateServicePrice();
-            });
-            
-            developmentOption.addEventListener('change', calculateServicePrice);
-            extendedWarranty.addEventListener('change', calculateServicePrice);
-            
-            updateDynamicFields();
-            calculateServicePrice();
-            
-            // Галерея
-            const gallerySlider = document.getElementById('gallerySlider');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const pagerDots = document.querySelectorAll('.pager-dot');
-            const pageInfo = document.getElementById('pageInfo');
-            
-            let currentPage = 0;
-            let itemsPerPage = 3;
-            let totalPages = 0;
-            
-            function updateItemsPerPage() {
-                if (window.innerWidth < 768) itemsPerPage = 1;
-                else if (window.innerWidth < 992) itemsPerPage = 2;
-                else itemsPerPage = 3;
-                
-                totalPages = Math.ceil(8 / itemsPerPage);
-                updateGallery();
-            }
-            
-            function updateGallery() {
-                const translateX = -currentPage * (100 / itemsPerPage);
-                gallerySlider.style.transform = `translateX(${translateX}%)`;
-                
-                prevBtn.disabled = currentPage === 0;
-                nextBtn.disabled = currentPage === totalPages - 1;
-                
-                pagerDots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentPage);
-                    dot.style.display = index < totalPages ? 'block' : 'none';
+                // Сбрасываем стили ошибок
+                this.form.querySelectorAll('input, textarea').forEach(field => {
+                    field.style.borderColor = '#e9ecef';
                 });
                 
-                pageInfo.textContent = `Страница ${currentPage + 1} из ${totalPages}`;
-            }
-            
-            function goToPage(page) {
-                currentPage = page;
-                updateGallery();
-            }
-            
-            function nextPage() {
-                if (currentPage < totalPages - 1) {
-                    currentPage++;
-                    updateGallery();
-                }
-            }
-            
-            function prevPage() {
-                if (currentPage > 0) {
-                    currentPage--;
-                    updateGallery();
-                }
-            }
-            
-            prevBtn.addEventListener('click', prevPage);
-            nextBtn.addEventListener('click', nextPage);
-            
-            pagerDots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const page = parseInt(this.getAttribute('data-page'));
-                    if (page < totalPages) goToPage(page);
+                // Проверка обязательных полей
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#ff4757';
+                        isValid = false;
+                    }
                 });
-            });
-            
-            window.addEventListener('resize', updateItemsPerPage);
-            updateItemsPerPage();
-            
-            function formatCurrency(amount) {
-                return new Intl.NumberFormat('ru-RU', {
-                    style: 'currency',
-                    currency: 'RUB',
-                    minimumFractionDigits: 0
-                }).format(amount);
+                
+                // Валидация email
+                const emailField = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailField.value && !emailRegex.test(emailField.value)) {
+                    emailField.style.borderColor = '#ff4757';
+                    isValid = false;
+                    this.showMessage('Пожалуйста, введите корректный email адрес', 'error');
+                }
+                
+                // Проверка чекбокса
+                const privacyCheckbox = document.getElementById('privacyPolicy');
+                if (!privacyCheckbox.checked) {
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+        }
+        
+        // Вспомогательные функции
+        function showPrivacyPolicy() {
+            alert(`Политика обработки персональных данных\n\nМы обязуемся защищать ваши персональные данные в соответствии с законодательством РФ. Все данные используются исключительно для обработки вашего запроса и не передаются третьим лицам.`);
+            return false;
+        }
+        
+        // Инициализация формы при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            new FeedbackForm();
+        });
+        
+        // Закрытие формы по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('popupOverlay');
+                if (overlay.classList.contains('active')) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    if (history.state && history.state.formOpen) {
+                        history.back();
+                    }
+                }
+            }
+        });
+        
+        // Предотвращение отправки формы при нажатии Enter в текстовом поле
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.tagName === 'TEXTAREA') {
+                e.stopPropagation();
             }
         });
     </script>
